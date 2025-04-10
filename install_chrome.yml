@@ -1,0 +1,19 @@
+---
+- name: Install Google Chrome on Ubuntu
+  hosts: local
+  become: yes
+
+  tasks:
+    - name: Download Google Chrome .deb package
+      get_url:
+        url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        dest: /tmp/google-chrome.deb
+
+    - name: Install Google Chrome
+      apt:
+        deb: /tmp/google-chrome.deb
+        state: present
+
+    - name: Verify Chrome installed
+      command: which google-chrome
+
