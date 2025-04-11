@@ -1,27 +1,22 @@
 pipeline {
     agent any
 
+    environment {
+        PATH = "/var/lib/jenkins/.local/bin:${env.PATH}"
+    }
+
     stages {
         stage('Debug Info') {
             steps {
-                echo "===== WHOAMI ====="
-                sh 'whoami'
-
-                echo "===== ENV ====="
-                sh 'printenv'
-
-                echo "===== WHERE IS ANSIBLE ====="
-                sh 'which ansible-playbook'
-
-                echo "===== ANSIBLE VERSION ====="
-                sh 'ansible-playbook --version'
+                sh 'echo "===== WHOAMI =====" && whoami'
+                sh 'echo "===== ENV =====" && printenv'
+                sh 'echo "===== WHERE IS ANSIBLE =====" && which ansible-playbook'
             }
         }
 
         stage('Run Playbook') {
             steps {
-                echo "===== RUNNING ANSIBLE PLAYBOOK ====="
-                sh 'ansible-playbook playbook.yml'
+                sh 'ansible-playbook your-playbook.yml'
             }
         }
     }
