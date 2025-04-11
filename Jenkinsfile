@@ -16,7 +16,7 @@ pipeline {
 
         stage('Run Playbook') {
             steps {
-                sh 'ansible-playbook your-playbook.yml'
+                sh 'ansible-playbook install_chrome.yml'
             }
         }
     }
