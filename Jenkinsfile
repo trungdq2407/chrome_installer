@@ -1,12 +1,21 @@
 pipeline {
   agent any
-  
+
   stages {
-    stage('Install Chrome with Ansible') {
+    stage('Debug Info') {
       steps {
-        echo 'Running Ansible playbook to install Chrome...'
         sh '''
-          ansible-playbook -i inventory install_chrome.yml
+          echo "===== WHOAMI ====="
+          whoami
+          
+          echo "===== ENV ====="
+          printenv
+          
+          echo "===== WHERE IS ANSIBLE ====="
+          which ansible-playbook
+
+          echo "===== RUN ANSIBLE ====="
+          ansible-playbook -i inventory install_chrome.yml -vvv
         '''
       }
     }
